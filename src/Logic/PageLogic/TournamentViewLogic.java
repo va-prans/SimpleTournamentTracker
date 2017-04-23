@@ -40,6 +40,7 @@ public class TournamentViewLogic {
            Match match = new Match(matchTeams, 0, uniqueID, previousBracketMatches.get(0).getTournamentID(), previousBracketMatches.get(0).getBracket() + 1, 5);
            databaseCalls.addMatchToDB(match);
            addedMatches.add(match);
+           //dankles
 
        }
 
