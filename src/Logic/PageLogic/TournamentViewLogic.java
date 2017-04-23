@@ -62,33 +62,6 @@ public class TournamentViewLogic {
 
    }
 
-   /*public Match createDummyMatch(String tourneyID, int bracket) {
-
-       Match dummyMatch;
-       Player dummy1 = new Player(UUID.randomUUID().toString(), "DUMMY");
-       Player dummy2 = new Player(UUID.randomUUID().toString(), "DUMMY");
-       ArrayList<Player> dummyPlayers1 = new ArrayList<>();
-       dummyPlayers1.add(dummy1);
-       dummyPlayers1.add(dummy2);
-       databaseCalls.addPlayerToDB(dummy1);
-       databaseCalls.addPlayerToDB(dummy2);
-       Team dummyTeam = new Team("DUMMY", dummyPlayers1, UUID.randomUUID().toString());
-       databaseCalls.addTeamToDB(dummyTeam);
-       Player dummy3 = new Player(UUID.randomUUID().toString(), "DUMMY");
-       Player dummy4 = new Player(UUID.randomUUID().toString(), "DUMMY");
-       ArrayList<Player> dummyPlayers2 = new ArrayList<>();
-       dummyPlayers2.add(dummy3);
-       dummyPlayers2.add(dummy4);
-       databaseCalls.addPlayerToDB(dummy3);
-       databaseCalls.addPlayerToDB(dummy4);
-       Team dummyTeam1 = new Team("DUMMY", dummyPlayers2, UUID.randomUUID().toString());
-       databaseCalls.addTeamToDB(dummyTeam1);
-       Team[] dummyTeams = {dummyTeam, dummyTeam1};
-       dummyMatch = new Match(dummyTeams, 0, UUID.randomUUID().toString(), tourneyID, bracket, 5 );
-       return dummyMatch;
-
-   }*/
-
    public void updateMatch(Match match){
        databaseCalls.updateMatch(match);
    }
@@ -128,13 +101,6 @@ public class TournamentViewLogic {
             allMatches.add(matches);
 
         }
-
-        /*Match match1 = allMatches.get(0).get(0);
-        Match match2 = allMatches.get(0).get(1);
-        ObservableList<Match> matchesTest = FXCollections.observableArrayList();
-        matchesTest.add(match1);
-        matchesTest.add(match2);
-        allMatches.add(matchesTest);*/
 
         return allMatches;
     }
