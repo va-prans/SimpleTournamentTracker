@@ -1,0 +1,74 @@
+package CoreClasses;
+
+import java.util.ArrayList;
+
+/**
+ * Created by NSA on 21-04-2017.
+ */
+public class Team {
+
+    private String teamName;
+    private ArrayList<Player> players;
+    private String uniqueID;
+    private ArrayList<Match> matchesPlayed;
+    private ArrayList<Match> upcomingMatches;
+    private String playerNames;
+
+    public Team(String teamname, ArrayList<Player> players, String uniqueID) {
+        this.teamName = teamname;
+        this.players = players;
+        this.uniqueID = uniqueID;
+        this.playerNames = players.get(0).getName() + " and " + players.get(1).getName();
+        //this.matchesPlayed = matchesPlayed;
+        //this.upcomingMatches = upcomingMatches;
+    }
+
+    public String getPlayerNames() {
+        return playerNames;
+    }
+
+    public void setPlayerNames(String playerNames) {
+        this.playerNames = playerNames;
+    }
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public ArrayList<Match> getMatchesPlayed() {
+        return matchesPlayed;
+    }
+
+    public void setMatchesPlayed(ArrayList<Match> matchesPlayed) {
+        this.matchesPlayed = matchesPlayed;
+    }
+
+    public ArrayList<Match> getUpcomingMatches() {
+        return upcomingMatches;
+    }
+
+    public void setUpcomingMatches(ArrayList<Match> upcomingMatches) {
+        this.upcomingMatches = upcomingMatches;
+    }
+
+}

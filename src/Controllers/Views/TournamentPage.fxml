@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.FlowPane?>
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TournamentViewController">
+   <children>
+      <Button mnemonicParsing="false" onAction="#showBracket" text="Bracket" />
+      <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="71.0" />
+      <TableView fx:id="bracketsTable" onMouseClicked="#mouseClickedOnMatchTable" prefHeight="292.0" prefWidth="781.0">
+        <columns>
+          <TableColumn prefWidth="167.0" text="Match Makeup"><cellValueFactory><PropertyValueFactory property="matchTeams" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="147.0" text="Team 0"><cellValueFactory><PropertyValueFactory property="team0" /></cellValueFactory></TableColumn>
+            <TableColumn prefWidth="152.0" text="Team 1"><cellValueFactory><PropertyValueFactory property="team1" /></cellValueFactory></TableColumn>
+            <TableColumn prefWidth="91.0" text="Match Played"><cellValueFactory><PropertyValueFactory property="matchPlayedString" /></cellValueFactory></TableColumn>
+            <TableColumn prefWidth="223.0" text="Team Won"><cellValueFactory><PropertyValueFactory property="indexOfWinningTeamString" /></cellValueFactory></TableColumn>
+        </columns>
+      </TableView>
+      <TableView fx:id="team0Table" onMouseClicked="#team0TableMouseClicked" prefHeight="39.0" prefWidth="395.0">
+        <columns>
+          <TableColumn prefWidth="186.0" text="Team 0 Name"><cellValueFactory><PropertyValueFactory property="teamName" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="207.0" text="Players"><cellValueFactory><PropertyValueFactory property="playerNames" /></cellValueFactory></TableColumn>
+        </columns>
+      </TableView>
+      <TableView fx:id="team1Table" onMouseClicked="#team1TableMouseClicked" prefHeight="56.0" prefWidth="384.0" translateX="-0.0">
+        <columns>
+          <TableColumn prefWidth="188.0" text="Team 1 Name"><cellValueFactory><PropertyValueFactory property="teamName" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="190.0" text="Players"><cellValueFactory><PropertyValueFactory property="playerNames" /></cellValueFactory></TableColumn>
+        </columns>
+      </TableView>
+      <TableView fx:id="playerTable" prefHeight="209.0" prefWidth="395.0" translateY="-0.0">
+        <columns>
+          <TableColumn prefWidth="183.0" text="Player Name"><cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="211.0" text="Player ID"><cellValueFactory><PropertyValueFactory property="uniqueID" /></cellValueFactory></TableColumn>
+        </columns>
+      </TableView>
+      <Button mnemonicParsing="false" onAction="#team0Win" text="Team0 Wins" />
+      <Button mnemonicParsing="false" onAction="#team1Win" text="Team1 Wins" />
+      <Button mnemonicParsing="false" onAction="#addBracket" text="Progress to next bracket" />
+   </children>
+</FlowPane>
