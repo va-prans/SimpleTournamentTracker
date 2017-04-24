@@ -139,6 +139,7 @@ public class TournamentViewController {
         team0Table.setItems(team0);
         team1Table.setItems(team1);
         //yoyo
+        //zingzomg
     }
 
     public void startSetMatchtables(){
