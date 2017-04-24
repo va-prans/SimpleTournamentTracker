@@ -36,6 +36,7 @@ public class DatabaseCalls {
             if (resultSet.next()) {
                 player = new Player(resultSet.getString(1), resultSet.getString(2));
             }
+            connection.close();
             return player;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,6 +79,7 @@ public class DatabaseCalls {
                 players.add(getPlayerFromDB(resultSet.getString(2)));
                 players.add(getPlayerFromDB(resultSet.getString(3)));
                 team = new Team(resultSet.getString(4), players, resultSet.getString(1));
+                connection.close();
             }
             return team;
         } catch (SQLException e) {

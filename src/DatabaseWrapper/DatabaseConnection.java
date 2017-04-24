@@ -9,10 +9,10 @@ import java.sql.DriverManager;
 
 public class DatabaseConnection {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/";
+    private static final String URL = "jdbc:mysql://mydb.cbuopdqv2nhx.us-west-2.rds.amazonaws.com:3306/";
     private static final String DB_NAME = "foosball";
-    private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String USER = "vaid";
+    private static final String PASS = "12345678";
 
 
     public static Connection getConn() {
