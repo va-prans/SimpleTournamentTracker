@@ -138,7 +138,7 @@ public class TournamentViewController {
         team1.add(tournamentViewLogic.getTeamFromDB(team1UniqueID));
         team0Table.setItems(team0);
         team1Table.setItems(team1);
-
+        //yoyo
     }
 
     public void startSetMatchtables(){
