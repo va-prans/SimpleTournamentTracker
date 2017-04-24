@@ -116,8 +116,9 @@ public class TournamentViewController {
 
     public void playerDisplay(String teamID){
 
-       ObservableList<Player> players = tournamentViewLogic.getPlayersInTeam(teamID);
-       playerTable.setItems(players);
+
+        ObservableList<Player> players = tournamentViewLogic.getPlayersInTeam(teamID);
+        playerTable.setItems(players);
 
     }
 
