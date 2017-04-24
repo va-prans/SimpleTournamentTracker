@@ -11,9 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,6 +33,10 @@ public class TournamentCreationController {
     @FXML TableView<Player> existingPlayersTable;
     @FXML TableView<Team> existingTeamsTable;
     @FXML Label teamAlreadyAddedWarning;
+    @FXML ProgressIndicator progressCircle;
+    @FXML Label loadingLabel;
+    @FXML Label creatingTeamLabel;
+    @FXML Button createTeamButton;
 
 
     ObservableList<Player> players = FXCollections.observableArrayList();
@@ -47,8 +49,17 @@ public class TournamentCreationController {
 
     @FXML public void initialize() {
 
-       fetchExistingPlayers();
-       fetchExistingTeams();
+        Thread one = new Thread(() -> {
+
+            fetchExistingPlayers();
+            fetchExistingTeams();
+            loadingLabel.setOpacity(0.0);
+            progressCircle.setProgress(1.0);
+            progressCircle.setOpacity(0.0);
+
+
+        });
+        one.start();
 
     }
 
@@ -60,6 +71,21 @@ public class TournamentCreationController {
     }
 
     public void fetchExistingTeams() {
+
+        Thread one = new Thread(() -> {
+            double progres = 0.0;
+
+            while (progres < 0.99) {
+                progres += 0.01;
+                progressCircle.setProgress(progres);
+                try {
+                    Thread.sleep(65);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        one.start();
 
         existingTeams = tournamentCreationLogic.getExistingTeams();
         existingTeamsTable.setItems(existingTeams);
@@ -106,22 +132,35 @@ public class TournamentCreationController {
 
     public void createTeam(ActionEvent actionEvent) {
 
-        ArrayList<Player> playersArray = new ArrayList();
-        for (int i = 0; i < players.size() ; i++) {
+        Thread one = new Thread(() -> {
+            if (players.size() > 0) {
+                creatingTeamLabel.setOpacity(1.0);
+                createTeamButton.setDisable(true);
+                ArrayList<Player> playersArray = new ArrayList();
+                for (int i = 0; i < players.size(); i++) {
 
-            playersArray.add(players.get(i));
+                    playersArray.add(players.get(i));
 
-        }
+                }
 
-        uniqueID = UUID.randomUUID().toString();
-        Team teamToAdd = new Team(teamNameField.getText(), playersArray, uniqueID);
-        teams.add(teamToAdd);
-        tournamentCreationLogic.addTeamToDB(teamToAdd);
-        fetchExistingTeams();
-        createdTeamsTable.setItems(teams);
+                uniqueID = UUID.randomUUID().toString();
+                Team teamToAdd = new Team(teamNameField.getText(), playersArray, uniqueID);
+                teams.add(teamToAdd);
+                tournamentCreationLogic.addTeamToDB(teamToAdd);
+                fetchExistingTeams();
+                createdTeamsTable.setItems(teams);
 
-        players.clear();
-        teamCreationTable.setItems(players);
+                players.clear();
+                teamCreationTable.setItems(players);
+                createTeamButton.setDisable(false);
+                creatingTeamLabel.setOpacity(0.0);
+            }
+
+            else {
+                System.out.println("not enuf playas");
+            }
+        });
+        one.start();
 
     }
 

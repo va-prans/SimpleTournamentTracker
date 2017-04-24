@@ -35,91 +35,110 @@ public class TournamentViewController {
 
     @FXML public void initialize() {
 
-        startSetMatchtables();
+        Thread one = new Thread(() -> {
+            startSetMatchtables();
+        });
+        one.start();
+
 
     }
 
     public void addBracket(ActionEvent actionEvent) {
 
-        boolean allGamesPlayed = true;
-        for (int i = 0; i < allMatches.get(allMatches.size()-1).size() ; i++) {
-            if (allMatches.get(allMatches.size()-1).get(i).getMatchPlayed() == 0) {
-                allGamesPlayed = false;
+            boolean allGamesPlayed = true;
+            for (int i = 0; i < allMatches.get(allMatches.size()-1).size() ; i++) {
+                if (allMatches.get(allMatches.size()-1).get(i).getMatchPlayed() == 0) {
+                    allGamesPlayed = false;
+                }
             }
-        }
-        if (allGamesPlayed == true) {
+            if (allGamesPlayed == true) {
 
-            if (allMatches.get(allMatches.size()-1).size() >= 2) {
-                allMatches.add(tournamentViewLogic.addBracket(allMatches.get(allMatches.size() - 1)));
-                choiceBox.getItems().add(allMatches.size() - 1);
-                choiceBox.setValue(allMatches.size() - 1);
+                if (allMatches.get(allMatches.size()-1).size() >= 2) {
+                    allMatches.add(tournamentViewLogic.addBracket(allMatches.get(allMatches.size() - 1)));
+                    choiceBox.getItems().add(allMatches.size() - 1);
+                    choiceBox.setValue(allMatches.size() - 1);
+                }
+                else {
+                    System.out.println("no matches to make, winners are decided.");
+                }
             }
-            else {
-                System.out.println("no matches to make, winners are decided.");
-            }
-        }
 
-        bracketsTable.setItems(allMatches.get(choiceBox.getValue()));
-        bracketsTable.refresh();
+            bracketsTable.setItems(allMatches.get(choiceBox.getValue()));
+            bracketsTable.refresh();
 
     }
 
     public void team0Win(ActionEvent actionEvent) {
 
-        System.out.println("team 0 win");
-        Match selectedMatch = bracketsTable.getSelectionModel().getSelectedItem();
-        for (int i = 0; i < allMatches.get(choiceBox.getValue()).size() ; i++) {
-            if (selectedMatch.getUniqueID().equals(allMatches.get(choiceBox.getValue()).get(i).getUniqueID())) {
-                allMatches.get(choiceBox.getValue()).get(i).setIndexOfWinningTeam(0);
-                selectedMatch = allMatches.get(choiceBox.getValue()).get(i);
+        Thread one = new Thread(() -> {
+            System.out.println("team 0 win");
+            Match selectedMatch = bracketsTable.getSelectionModel().getSelectedItem();
+            for (int i = 0; i < allMatches.get(choiceBox.getValue()).size() ; i++) {
+                if (selectedMatch.getUniqueID().equals(allMatches.get(choiceBox.getValue()).get(i).getUniqueID())) {
+                    allMatches.get(choiceBox.getValue()).get(i).setIndexOfWinningTeam(0);
+                    selectedMatch = allMatches.get(choiceBox.getValue()).get(i);
+                }
             }
-        }
-        bracketsTable.refresh();
-        //updateDB
-        tournamentViewLogic.updateMatch(selectedMatch);
+            bracketsTable.refresh();
+            //updateDB
+            tournamentViewLogic.updateMatch(selectedMatch);
+        });
+        one.start();
+
 
     }
 
     public void team1Win(ActionEvent actionEvent) {
 
-        System.out.println("team 1 win");
-        Match selectedMatch = bracketsTable.getSelectionModel().getSelectedItem();
-        for (int i = 0; i < allMatches.get(choiceBox.getValue()).size() ; i++) {
-            if (selectedMatch.getUniqueID().equals(allMatches.get(choiceBox.getValue()).get(i).getUniqueID())) {
-                allMatches.get(choiceBox.getValue()).get(i).setIndexOfWinningTeam(1);
+        Thread one = new Thread(() -> {
+            System.out.println("team 1 win");
+            Match selectedMatch = bracketsTable.getSelectionModel().getSelectedItem();
+            for (int i = 0; i < allMatches.get(choiceBox.getValue()).size() ; i++) {
+                if (selectedMatch.getUniqueID().equals(allMatches.get(choiceBox.getValue()).get(i).getUniqueID())) {
+                    allMatches.get(choiceBox.getValue()).get(i).setIndexOfWinningTeam(1);
+                }
             }
-        }
-        bracketsTable.refresh();
-        //updateDB
-        tournamentViewLogic.updateMatch(selectedMatch);
+            bracketsTable.refresh();
+            //updateDB
+            tournamentViewLogic.updateMatch(selectedMatch);
+        });
+        one.start();
+
 
     }
 
     public void team0TableMouseClicked(MouseEvent mouseEvent) {
 
-        if (team1Table.getSelectionModel().getSelectedItem() != null) {
-            Team selectedTeam = team0Table.getSelectionModel().getSelectedItem();
-            playerDisplay(selectedTeam.getUniqueID());
-        }
+
+            if (team0Table.getSelectionModel().getSelectedItem() != null) {
+                Team selectedTeam = team0Table.getSelectionModel().getSelectedItem();
+                playerDisplay(selectedTeam.getUniqueID());
+            }
+
+
 
     }
 
 
     public void team1TableMouseClicked(MouseEvent mouseEvent) {
 
-        if (team1Table.getSelectionModel().getSelectedItem() != null) {
-            Team selectedTeam = team1Table.getSelectionModel().getSelectedItem();
-            playerDisplay(selectedTeam.getUniqueID());
-        }
+
+            if (team1Table.getSelectionModel().getSelectedItem() != null) {
+                Team selectedTeam = team1Table.getSelectionModel().getSelectedItem();
+                playerDisplay(selectedTeam.getUniqueID());
+            }
+
+
 
     }
 
     public void playerDisplay(String teamID){
 
-
-        ObservableList<Player> players = tournamentViewLogic.getPlayersInTeam(teamID);
-        playerTable.setItems(players);
-
+        Thread one = new Thread(() -> {
+            ObservableList<Player> players = tournamentViewLogic.getPlayersInTeam(teamID);
+            playerTable.setItems(players);
+        });
+        one.start();
     }
 
     public void mouseClickedOnMatchTable(MouseEvent mouseEvent) {
@@ -134,12 +153,18 @@ public class TournamentViewController {
     public void teamTablesDisplay(String team0UniqueID, String team1UniqueID) {
 
         Thread one = new Thread(() -> {
-            ObservableList<Team> team0 = FXCollections.observableArrayList();
-            ObservableList<Team> team1 = FXCollections.observableArrayList();
-            team0.add(tournamentViewLogic.getTeamFromDB(team0UniqueID));
-            team1.add(tournamentViewLogic.getTeamFromDB(team1UniqueID));
-            team0Table.setItems(team0);
-            team1Table.setItems(team1);
+            try {
+
+                ObservableList<Team> team0 = FXCollections.observableArrayList();
+                ObservableList<Team> team1 = FXCollections.observableArrayList();
+                team0.add(tournamentViewLogic.getTeamFromDB(team0UniqueID));
+                team1.add(tournamentViewLogic.getTeamFromDB(team1UniqueID));
+                team0Table.setItems(team0);
+                team1Table.setItems(team1);
+
+            } catch (NullPointerException e) {
+               // System.out.println("Null caught");
+            }
         });
         one.start();
 
