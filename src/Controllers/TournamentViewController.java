@@ -133,12 +133,16 @@ public class TournamentViewController {
 
     public void teamTablesDisplay(String team0UniqueID, String team1UniqueID) {
 
-        ObservableList<Team> team0 = FXCollections.observableArrayList();
-        ObservableList<Team> team1 = FXCollections.observableArrayList();
-        team0.add(tournamentViewLogic.getTeamFromDB(team0UniqueID));
-        team1.add(tournamentViewLogic.getTeamFromDB(team1UniqueID));
-        team0Table.setItems(team0);
-        team1Table.setItems(team1);
+        Thread one = new Thread(() -> {
+            ObservableList<Team> team0 = FXCollections.observableArrayList();
+            ObservableList<Team> team1 = FXCollections.observableArrayList();
+            team0.add(tournamentViewLogic.getTeamFromDB(team0UniqueID));
+            team1.add(tournamentViewLogic.getTeamFromDB(team1UniqueID));
+            team0Table.setItems(team0);
+            team1Table.setItems(team1);
+        });
+        one.start();
+
 
     }
 
