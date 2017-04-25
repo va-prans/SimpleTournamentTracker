@@ -4,6 +4,8 @@ import CoreClasses.Match;
 import CoreClasses.Player;
 import CoreClasses.Team;
 import CoreClasses.Tournament;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,6 +21,29 @@ public class DatabaseCalls {
     SingletonDatabase singletonDatabase; //= new SingletonDatabase();
     Connection connection = null;
 
+    public Tournament getTournament(String tournamentID) {
+
+        Tournament tournament = null;
+
+
+
+        return tournament;
+    }
+
+    public ObservableList<Tournament> getAllTournaments() {
+
+        ObservableList<Tournament> tournaments = FXCollections.observableArrayList();
+        ResultSet resultSet = sqlQueryWithReturn("SELECT * FROM tournament");
+        try {
+            while (resultSet.next()) {
+                tournaments.add(new Tournament(resultSet.getString(2), resultSet.getString(1)));
+            }
+            return tournaments;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public void addPlayerToDB(Player player) {
 
@@ -129,6 +154,44 @@ public class DatabaseCalls {
                 + "', '" + match.getIndexOfLosingTeam() + "', '" + match.isMatchPlayed() + "', '" + match.getTournamentID() + "', '" + match.getBracket() + "');";
         sqlQuery(sql);
 
+    }
+
+    public ArrayList<ArrayList<Match>> getTournamentMatches (String tournamentID) {
+
+        ArrayList<ArrayList<Match>> brackets = new ArrayList<>();
+        for (int i = 0; i <= getAmountOfBrackets(tournamentID) ; i++) {
+            brackets.add(new ArrayList<>());
+        }
+        System.out.println("brackets size = " + brackets.size());
+        ResultSet resultSet = sqlQueryWithReturn("SELECT * FROM matches WHERE tournamentid = '" + tournamentID + "'");
+        try {
+            while (resultSet.next()){
+                Team[] teams = {getTeamFromDB(resultSet.getString(2)), getTeamFromDB(resultSet.getString(3))};
+                Match match = new Match(teams, resultSet.getInt(6), resultSet.getString(1), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(4));
+                brackets.get(resultSet.getInt(8)).add(match);
+                System.out.println("added match to bracket: " + resultSet.getInt(8));
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return brackets;
+        }
+
+        return brackets;
+    }
+
+    public int getAmountOfBrackets(String tournamentID) {
+        int bracketAmount = 0;
+        ResultSet resultSet = sqlQueryWithReturn("SELECT MAX(tournamentbracket) AS bracketamount FROM matches WHERE tournamentid = '" + tournamentID + "'");
+        try {
+            if (resultSet.next()) {
+                bracketAmount = resultSet.getInt("bracketamount");
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bracketAmount;
     }
 
     public void updateMatch(Match match){

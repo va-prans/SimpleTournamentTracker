@@ -21,6 +21,14 @@ import java.util.UUID;
 /**
  * Created by NSA on 22-04-2017.
  */
+
+/*
+To do:
+make sure players/teams with empty names can't be created
+use a single DUMMY player/team for match creation when there are an odd number of teams
+possibly don't re fetch all teams from DB when creating a new team - just add them to the existing teams list and refresh and add to DB on separate thread
+add more statistics to existing players/teams + add more input variables for teams/players
+ */
 public class TournamentCreationController {
 
     String uniqueID;
@@ -133,7 +141,9 @@ public class TournamentCreationController {
     public void createTeam(ActionEvent actionEvent) {
 
         Thread one = new Thread(() -> {
+
             if (players.size() > 0) {
+
                 creatingTeamLabel.setOpacity(1.0);
                 createTeamButton.setDisable(true);
                 ArrayList<Player> playersArray = new ArrayList();
@@ -147,19 +157,24 @@ public class TournamentCreationController {
                 Team teamToAdd = new Team(teamNameField.getText(), playersArray, uniqueID);
                 teams.add(teamToAdd);
                 tournamentCreationLogic.addTeamToDB(teamToAdd);
-                fetchExistingTeams();
                 createdTeamsTable.setItems(teams);
-
+                existingTeams.add(teamToAdd);
+                existingTeamsTable.refresh();
                 players.clear();
                 teamCreationTable.setItems(players);
                 createTeamButton.setDisable(false);
                 creatingTeamLabel.setOpacity(0.0);
+
             }
 
             else {
+
                 System.out.println("not enuf playas");
+
             }
+
         });
+
         one.start();
 
     }

@@ -48,7 +48,13 @@ public class AdminController {
 
     }
 
-    public void loadTournament(ActionEvent actionEvent) {
+    public void loadTournament(ActionEvent actionEvent) throws IOException {
+
+        Stage stage = Main.getStage();
+        Parent root = FXMLLoader.load(getClass().getResource("Views/TournamentLoad.fxml"));
+        stage.setTitle("TourneyLoadPage");
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
 

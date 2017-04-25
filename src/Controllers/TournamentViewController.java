@@ -10,11 +10,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Currency;
 
@@ -28,6 +34,7 @@ public class TournamentViewController {
     @FXML TableView <Team> team1Table;
     @FXML ChoiceBox <Integer> choiceBox;
     @FXML TableView <Player> playerTable;
+    @FXML Label tournamentNameLabel;
 
     ObservableList<ObservableList<Match>> allMatches = FXCollections.observableArrayList();
 
@@ -39,7 +46,7 @@ public class TournamentViewController {
             startSetMatchtables();
         });
         one.start();
-
+        tournamentNameLabel.setText(CurrentUser.getCurrentTournament().getName());
 
     }
 
@@ -186,6 +193,16 @@ public class TournamentViewController {
     public void showBracket(ActionEvent actionEvent) {
 
         bracketsTable.setItems(allMatches.get(choiceBox.getValue()));
+
+    }
+
+    public void backToStart(ActionEvent actionEvent) throws IOException {
+
+        Stage stage = Main.getStage();
+        Parent root = FXMLLoader.load(getClass().getResource("Views/AdminPage.fxml"));
+        stage.setTitle("AdminPage");
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
 }

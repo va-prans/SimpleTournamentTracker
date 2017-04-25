@@ -44,7 +44,7 @@
       </TableView>
       <Button alignment="CENTER" mnemonicParsing="false" onAction="#addNewPlayerToTeam" text="Add new player to team" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
       <Button mnemonicParsing="false" onAction="#removeFromTeam" text="Remove player from team" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
-      <Button fx:id="createTeamButton" mnemonicParsing="false" onAction="#createTeam" text="Create Team" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
+      <Button fx:id="createTeamButton" mnemonicParsing="false" onAction="#createTeam" text="Create team" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
       <TableView fx:id="existingPlayersTable" prefHeight="178.0" prefWidth="300.0" GridPane.rowIndex="1">
         <columns>
           <TableColumn prefWidth="153.0" text="Existing Players"><cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory></TableColumn>

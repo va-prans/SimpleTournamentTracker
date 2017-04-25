@@ -19,6 +19,13 @@ public class Tournament {
 
     }
 
+    public Tournament(String uniqueID, String name) {
+
+        this.uniqueID = uniqueID;
+        this.name = name;
+
+    }
+
     public void printMatches(){
 
 

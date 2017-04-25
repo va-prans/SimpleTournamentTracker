@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TournamentLoadController">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="0.0" prefWidth="0.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="573.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.0" minWidth="0.0" prefWidth="0.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="540.0" minHeight="10.0" prefHeight="540.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="184.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <TableView fx:id="tournamentTableView" prefHeight="245.0" prefWidth="573.0" GridPane.columnIndex="1">
+        <columns>
+          <TableColumn fx:id="tournamentName" prefWidth="286.0" text="Tournament Name" />
+          <TableColumn fx:id="tournamentID" minWidth="0.0" prefWidth="286.0" text="Tournament ID" />
+        </columns>
+      </TableView>
+      <Button fx:id="loadTournamentButton" mnemonicParsing="false" onAction="#loadTournament" text="Load Tournament" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label fx:id="loadingLabel" text="Loading tournament.." translateX="-75.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+   </children>
+</GridPane>

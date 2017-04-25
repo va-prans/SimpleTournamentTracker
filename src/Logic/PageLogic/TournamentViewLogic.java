@@ -88,6 +88,11 @@ public class TournamentViewLogic {
         ObservableList<ObservableList<Match>> allMatches = FXCollections.observableArrayList();
         ArrayList<ArrayList<Match>> brackets = tournament.getBrackets();
 
+        System.out.println("[ViewLogic]brackets size = " + brackets.size());
+        for (int i = 0; i < brackets.size() ; i++) {
+            System.out.println("size of bracket" + i + " " +brackets.get(i).size());
+        }
+
         for (int i = 0; i < brackets.size() ; i++) {
 
             ObservableList<Match> matches = FXCollections.observableArrayList();
