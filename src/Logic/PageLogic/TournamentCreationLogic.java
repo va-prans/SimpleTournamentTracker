@@ -82,6 +82,7 @@ public class TournamentCreationLogic {
             //waazaa
             Team dummyTeam = databaseCalls.getTeamFromDB("7dee61b2-1cca-4b9c-82dc-d9e205a7e8f4");
             teamsArray.add(dummyTeam);
+
         }
 
 
