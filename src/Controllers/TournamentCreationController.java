@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,9 +25,9 @@ import java.util.UUID;
 
 /*
 To do:
-make sure players/teams with empty names can't be created
-use a single DUMMY player/team for match creation when there are an odd number of teams
-possibly don't re fetch all teams from DB when creating a new team - just add them to the existing teams list and refresh and add to DB on separate thread
+make sure players/teams with empty names can't be created //done
+use a single DUMMY player/team for match creation when there are an odd number of teams //done
+possibly don't re fetch all teams from DB when creating a new team - just add them to the existing teams list and refresh and add to DB on separate thread //done
 add more statistics to existing players/teams + add more input variables for teams/players
  */
 public class TournamentCreationController {
@@ -45,6 +46,9 @@ public class TournamentCreationController {
     @FXML Label loadingLabel;
     @FXML Label creatingTeamLabel;
     @FXML Button createTeamButton;
+    @FXML Label playerNameWarningLabel;
+    @FXML Label teamNameWarningLabel;
+    @FXML Label tournamentWarningLabel;
 
 
     ObservableList<Player> players = FXCollections.observableArrayList();
@@ -104,18 +108,29 @@ public class TournamentCreationController {
 
         if (players.size() <= 1) {
 
-            uniqueID = UUID.randomUUID().toString();
-            Player playerToAdd = new Player(uniqueID, playerNameField.getText());
-            players.add(playerToAdd);
-            tournamentCreationLogic.addPlayerToDB(playerToAdd);
-            fetchExistingPlayers();
-            teamCreationTable.setItems(players);
+            if (!StringUtils.isBlank(playerNameField.getText())) {
 
+                playerNameWarningLabel.setText("");
+                uniqueID = UUID.randomUUID().toString();
+                Player playerToAdd = new Player(uniqueID, playerNameField.getText());
+                players.add(playerToAdd);
+                tournamentCreationLogic.addPlayerToDB(playerToAdd);
+                fetchExistingPlayers();
+                teamCreationTable.setItems(players);
+                playerNameField.clear();
+
+            }
+
+            else {
+
+                playerNameWarningLabel.setText("Choose a name.");
+
+            }
         }
 
         else {
 
-            playerNameField.setText("Team Full.");
+            playerNameWarningLabel.setText("Team Full.");
 
         }
 
@@ -140,42 +155,57 @@ public class TournamentCreationController {
 
     public void createTeam(ActionEvent actionEvent) {
 
-        Thread one = new Thread(() -> {
-
             if (players.size() > 0) {
 
-                creatingTeamLabel.setOpacity(1.0);
-                createTeamButton.setDisable(true);
-                ArrayList<Player> playersArray = new ArrayList();
-                for (int i = 0; i < players.size(); i++) {
+                if (!StringUtils.isBlank(teamNameField.getText())) {
 
-                    playersArray.add(players.get(i));
+                    String teamName = teamNameField.getText();
+                    teamNameField.clear();
+                    teamNameWarningLabel.setText("");
+                    Thread one = new Thread(() -> {
+
+                        creatingTeamLabel.setOpacity(1.0);
+                        createTeamButton.setDisable(true);
+                        ArrayList<Player> playersArray = new ArrayList();
+                        for (int i = 0; i < players.size(); i++) {
+
+                            playersArray.add(players.get(i));
+
+                        }
+                        uniqueID = UUID.randomUUID().toString();
+                        Team teamToAdd = new Team(teamName, playersArray, uniqueID);
+                        teams.add(teamToAdd);
+                        tournamentCreationLogic.addTeamToDB(teamToAdd);
+                        createdTeamsTable.setItems(teams);
+                        existingTeams.add(teamToAdd);
+                        existingTeamsTable.refresh();
+                        players.clear();
+                        teamCreationTable.setItems(players);
+                        createTeamButton.setDisable(false);
+                        creatingTeamLabel.setOpacity(0.0);
+
+                    });
+
+                    one.start();
 
                 }
 
-                uniqueID = UUID.randomUUID().toString();
-                Team teamToAdd = new Team(teamNameField.getText(), playersArray, uniqueID);
-                teams.add(teamToAdd);
-                tournamentCreationLogic.addTeamToDB(teamToAdd);
-                createdTeamsTable.setItems(teams);
-                existingTeams.add(teamToAdd);
-                existingTeamsTable.refresh();
-                players.clear();
-                teamCreationTable.setItems(players);
-                createTeamButton.setDisable(false);
-                creatingTeamLabel.setOpacity(0.0);
+                else {
+
+                    teamNameWarningLabel.setText("Choose a name.");
+
+                }
+
 
             }
 
             else {
 
-                System.out.println("not enuf playas");
+                teamNameWarningLabel.setText("Not enough players.");
 
             }
 
-        });
 
-        one.start();
 
     }
 
@@ -184,15 +214,38 @@ public class TournamentCreationController {
 
         if (players.size() <= 1) {
 
+            boolean playerAlreadyAdded = false;
+            playerNameWarningLabel.setText("");
             Player existingPlayerToAdd = existingPlayersTable.getSelectionModel().getSelectedItem();
-            players.add(existingPlayerToAdd);
-            teamCreationTable.setItems(players);
+
+            for (int i = 0; i < players.size(); i++) {
+
+                if (existingPlayerToAdd.getUniqueID().equals(players.get(i).getUniqueID())){
+
+                    playerAlreadyAdded = true;
+
+                }
+
+            }
+            if (!playerAlreadyAdded) {
+
+                players.add(existingPlayerToAdd);
+                teamCreationTable.setItems(players);
+                teamAlreadyAddedWarning.setText("");
+
+            }
+
+            else {
+
+                playerNameWarningLabel.setText("Player already added to team.");
+
+            }
 
         }
 
         else {
 
-            playerNameField.setText("Team Full.");
+            playerNameWarningLabel.setText("Team Full.");
 
         }
     }
@@ -202,17 +255,25 @@ public class TournamentCreationController {
         boolean teamAlreadyAdded = false;
         Team existingTeamToAdd = existingTeamsTable.getSelectionModel().getSelectedItem();
         for (int i = 0; i < teams.size(); i++) {
+
             if (existingTeamToAdd.getUniqueID().equals(teams.get(i).getUniqueID())){
+
                 teamAlreadyAdded = true;
+
             }
+
         }
         if (teamAlreadyAdded == false) {
+
             teams.add(existingTeamToAdd);
             createdTeamsTable.setItems(teams);
             teamAlreadyAddedWarning.setText("");
+
         }
         else {
-            teamAlreadyAddedWarning.setText("Team already added to tournament. Choose another team.");
+
+            teamAlreadyAddedWarning.setText("Team already added to tournament.");
+
         }
     }
 
@@ -233,12 +294,31 @@ public class TournamentCreationController {
 
     public void create(ActionEvent actionEvent) throws IOException {
 
-        tournamentCreationLogic.createNewTournament(teams, tournamentNameField.getText());
-        Stage window = Main.getStage();
-        Parent root = FXMLLoader.load(getClass().getResource("Views/TournamentPage.fxml"));
-        window.setTitle("TournamentPage");
-        window.setScene(new Scene(root));
-        window.show();
+        if (teams.size() > 1) {
+
+            if (!StringUtils.isBlank(tournamentNameField.getText())) {
+
+                tournamentCreationLogic.createNewTournament(teams, tournamentNameField.getText());
+                Stage window = Main.getStage();
+                Parent root = FXMLLoader.load(getClass().getResource("Views/TournamentPage.fxml"));
+                window.setTitle("TournamentPage");
+                window.setScene(new Scene(root));
+                window.show();
+
+            }
+
+            else {
+
+                tournamentWarningLabel.setText("Choose tournament name.");
+
+            }
+        }
+
+        else {
+
+            tournamentWarningLabel.setText("Not enough teams.");
+
+        }
 
     }
 }

@@ -70,7 +70,7 @@ public class TournamentCreationLogic {
         }
         if((teamsArray.size()%2)!=0){
 
-            Player dummy1 = new Player(UUID.randomUUID().toString(), "DUMMY");
+            /*Player dummy1 = new Player(UUID.randomUUID().toString(), "DUMMY");
             Player dummy2 = new Player(UUID.randomUUID().toString(), "DUMMY");
             addPlayerToDB(dummy1);
             addPlayerToDB(dummy2);
@@ -78,7 +78,8 @@ public class TournamentCreationLogic {
             dummyPlayers1.add(dummy1);
             dummyPlayers1.add(dummy2);
             Team dummyTeam = new Team("DUMMY", dummyPlayers1, UUID.randomUUID().toString());
-            addTeamToDB(dummyTeam);
+            addTeamToDB(dummyTeam);*/
+            Team dummyTeam = databaseCalls.getTeamFromDB("7dee61b2-1cca-4b9c-82dc-d9e205a7e8f4");
             teamsArray.add(dummyTeam);
         }
 

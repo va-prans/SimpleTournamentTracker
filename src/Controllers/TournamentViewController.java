@@ -46,7 +46,7 @@ public class TournamentViewController {
             startSetMatchtables();
         });
         one.start();
-        tournamentNameLabel.setText(CurrentUser.getCurrentTournament().getName());
+        tournamentNameLabel.setText("  [Tournament Name]:  " + CurrentUser.getCurrentTournament().getName() + "  ");
 
     }
 
