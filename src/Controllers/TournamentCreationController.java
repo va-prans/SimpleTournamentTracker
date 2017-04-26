@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 
 /*
-To do:
+To do:d
 make sure players/teams with empty names can't be created //done
 use a single DUMMY player/team for match creation when there are an odd number of teams //done
 possibly don't re fetch all teams from DB when creating a new team - just add them to the existing teams list and refresh and add to DB on separate thread //done
