@@ -20,6 +20,16 @@ public class Player {
         this.uniqueID = uniqueID;
     }
 
+    public Player(String name, String uniqueID, String eMail, LocalDateTime dateOfBirth, String score, String matchesPlayed, String tournamentsWon) {
+        this.name = name;
+        this.uniqueID = uniqueID;
+        this.eMail = eMail;
+        this.dateOfBirth = dateOfBirth;
+        this.score = score;
+        this.matchesPlayed = matchesPlayed;
+        this.tournamentsWon = tournamentsWon;
+    }
+
     public String getName() {
         return name;
     }

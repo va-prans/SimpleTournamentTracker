@@ -22,8 +22,6 @@ public class Team {
         this.players = players;
         this.uniqueID = uniqueID;
         this.playerNames = players.get(0).getName() + " and " + players.get(1).getName();
-        //this.matchesPlayed = matchesPlayed;
-        //this.upcomingMatches = upcomingMatches;
 
     }
 
