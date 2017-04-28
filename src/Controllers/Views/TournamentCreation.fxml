@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TournamentCreationController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="721.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TournamentCreationController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="127.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="174.0" minHeight="0.0" prefHeight="174.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="179.0" minHeight="0.0" prefHeight="179.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="144.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="265.0" minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES" />
@@ -32,8 +32,10 @@
       <TextField fx:id="teamNameField" prefHeight="19.0" prefWidth="300.0" GridPane.rowIndex="5" />
       <TableView fx:id="teamCreationTable" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
         <columns>
-          <TableColumn prefWidth="156.0" text="[TEAM]Player Name"><cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory></TableColumn>
-            <TableColumn prefWidth="143.0" text="Player ID"><cellValueFactory><PropertyValueFactory property="uniqueID" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="127.0" text="[TEAM]Player Name"><cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory></TableColumn>
+            <TableColumn prefWidth="72.0" text="E-Mail"><cellValueFactory><PropertyValueFactory property="uniqueID" /></cellValueFactory></TableColumn>
+            <TableColumn prefWidth="93.0" text="Birthdate" />
+            <TableColumn prefWidth="88.0" text="Score" />
         </columns>
       </TableView>
       <TableView fx:id="createdTeamsTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -47,8 +49,10 @@
       <Button fx:id="createTeamButton" mnemonicParsing="false" onAction="#createTeam" text="Create team" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
       <TableView fx:id="existingPlayersTable" prefHeight="178.0" prefWidth="300.0" GridPane.rowIndex="1">
         <columns>
-          <TableColumn prefWidth="153.0" text="Existing Players"><cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory></TableColumn>
-            <TableColumn prefWidth="146.0" text="Player ID"><cellValueFactory><PropertyValueFactory property="uniqueID" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="123.0" text="Existing Players"><cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory></TableColumn>
+            <TableColumn prefWidth="58.0" text="E-mail"><cellValueFactory><PropertyValueFactory property="uniqueID" /></cellValueFactory></TableColumn>
+            <TableColumn prefWidth="92.0" text="Birthdate" />
+            <TableColumn prefWidth="107.0" text="Score" />
         </columns>
       </TableView>
       <TableView fx:id="existingTeamsTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -69,5 +73,6 @@
       <Label fx:id="playerNameWarningLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="301.0" translateY="16.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
       <Label fx:id="teamNameWarningLabel" prefHeight="20.0" prefWidth="293.0" translateY="16.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
       <Label fx:id="tournamentWarningLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="298.0" translateY="16.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+      <TextField prefHeight="25.0" prefWidth="101.0" scaleX="0.2" text="E-mail" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
    </children>
 </GridPane>
