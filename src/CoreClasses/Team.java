@@ -10,17 +10,25 @@ public class Team {
     private String teamName;
     private ArrayList<Player> players;
     private String uniqueID;
-    private ArrayList<Match> matchesPlayed;
-    private ArrayList<Match> upcomingMatches;
+    private ArrayList<Match> matches;
     private String playerNames;
+    private int score;
+    private int tournamentsWon;
+
 
     public Team(String teamname, ArrayList<Player> players, String uniqueID) {
+
         this.teamName = teamname;
         this.players = players;
         this.uniqueID = uniqueID;
         this.playerNames = players.get(0).getName() + " and " + players.get(1).getName();
         //this.matchesPlayed = matchesPlayed;
         //this.upcomingMatches = upcomingMatches;
+
+    }
+
+    public void setMatches(ArrayList<Match> matches) {
+        this.matches = matches;
     }
 
     public String getPlayerNames() {
@@ -53,22 +61,6 @@ public class Team {
 
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
-    }
-
-    public ArrayList<Match> getMatchesPlayed() {
-        return matchesPlayed;
-    }
-
-    public void setMatchesPlayed(ArrayList<Match> matchesPlayed) {
-        this.matchesPlayed = matchesPlayed;
-    }
-
-    public ArrayList<Match> getUpcomingMatches() {
-        return upcomingMatches;
-    }
-
-    public void setUpcomingMatches(ArrayList<Match> upcomingMatches) {
-        this.upcomingMatches = upcomingMatches;
     }
 
 }

@@ -1,5 +1,7 @@
 package CoreClasses;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by NSA on 21-04-2017.
  */
@@ -7,6 +9,11 @@ public class Player {
 
     private String name;
     private String uniqueID;
+    private String eMail;
+    private LocalDateTime dateOfBirth;
+    private String score;
+    private String matchesPlayed;
+    private String tournamentsWon;
 
     public Player(String uniqueID, String name) {
         this.name = name;

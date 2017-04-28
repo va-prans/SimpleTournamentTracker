@@ -68,6 +68,7 @@ public class TournamentLoadController {
 
         loadTournamentButton.setDisable(true);
         loadingLabel.setOpacity(1.0);
+
         Task<Void> databaseTask = new Task<Void>() {
             @Override
             public Void call(){
