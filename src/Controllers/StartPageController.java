@@ -52,6 +52,7 @@ public class StartPageController {
 
         if (startPageLogic.adminSuccessfulLogin(usernameField.getText(), passwordField.getText())) {
 
+            CurrentUser.setAdmin(true);
             CurrentUser.setUsername(usernameField.getText());
             Stage window = Main.getStage();
             Parent root = FXMLLoader.load(getClass().getResource("Views/AdminPage.fxml"));
@@ -66,5 +67,16 @@ public class StartPageController {
             incorrectDetailsWarning.setText("Incorrect Password or Username.");
 
         }
+    }
+
+    public void guestLogin(ActionEvent actionEvent) throws IOException {
+
+        CurrentUser.setAdmin(false);
+        Stage window = Main.getStage();
+        Parent root = FXMLLoader.load(getClass().getResource("Views/TournamentLoad.fxml"));
+        window.setTitle("AdminPage");
+        window.setScene(new Scene(root));
+        window.show();
+
     }
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressedEvent" prefHeight="177.0" prefWidth="196.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StartPageController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressedEvent" prefHeight="177.0" prefWidth="212.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StartPageController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="210.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="0.0" prefWidth="0.0" />
@@ -20,12 +20,12 @@
     <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="AdminLoginButton" mnemonicParsing="false" onAction="#AdminLogin" prefHeight="25.0" prefWidth="100.0" text="Login as admin" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <Button fx:id="AdminLoginButton" mnemonicParsing="false" onAction="#AdminLogin" prefHeight="25.0" prefWidth="105.0" text="Login as admin" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="Login as player" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Button mnemonicParsing="false" onAction="#guestLogin" prefHeight="25.0" prefWidth="105.0" text="Guest(No login)" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
       <TextField fx:id="usernameField" prefHeight="22.0" prefWidth="181.0" GridPane.valignment="BOTTOM" />
       <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="182.0" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
       <Label alignment="CENTER" prefHeight="32.0" prefWidth="180.0" text="Username" GridPane.halignment="CENTER" GridPane.valignment="TOP" />

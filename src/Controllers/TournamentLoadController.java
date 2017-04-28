@@ -1,6 +1,7 @@
 package Controllers;
 
 import CoreClasses.Tournament;
+import Logic.PageLogic.CurrentUser;
 import Logic.PageLogic.TournamentLoadLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -90,10 +91,19 @@ public class TournamentLoadController {
 
         Stage window = Main.getStage();
         Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("Views/TournamentPage.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (CurrentUser.isAdmin()) {
+            try {
+                root = FXMLLoader.load(getClass().getResource("Views/TournamentPage.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (!CurrentUser.isAdmin()){
+            try {
+                root = FXMLLoader.load(getClass().getResource("Views/TournamentGuestPage.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         window.setTitle("TournamentPage");
         window.setScene(new Scene(root));

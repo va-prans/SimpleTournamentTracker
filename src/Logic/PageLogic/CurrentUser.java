@@ -8,7 +8,16 @@ import CoreClasses.Tournament;
 public class CurrentUser {
 
     public static Tournament currentTournament;
-    static String username;
+    private static String username;
+    private static boolean isAdmin;
+
+    public static boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public static void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     public static String getUsername() {
         return username;
