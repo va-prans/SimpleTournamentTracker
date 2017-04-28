@@ -21,6 +21,13 @@ public class DatabaseCalls {
     SingletonDatabase singletonDatabase; //= new SingletonDatabase();
     Connection connection = null;
 
+    public void updatePlayerScore(Player player) {
+
+        String sql = "UPDATE players SET score = '" + player.getScore() + "' WHERE id = '" + player.getUniqueID() + "'";
+        sqlQuery(sql);
+
+    }
+
     public Tournament getTournament(String tournamentID) {
 
         Tournament tournament = null;
@@ -38,6 +45,7 @@ public class DatabaseCalls {
             while (resultSet.next()) {
                 tournaments.add(new Tournament(resultSet.getString(2), resultSet.getString(1)));
             }
+            connection.close();
             return tournaments;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,8 +55,8 @@ public class DatabaseCalls {
 
     public void addPlayerToDB(Player player) {
 
-        String sql = "INSERT INTO `players` (`id`, `playername`) " +
-                "VALUES ('" + player.getUniqueID() + "', '" + player.getName() + "');";
+        String sql = "INSERT INTO `players` (`id`, `playername`, `email`, `dateofbirth`, `score`) " +
+                "VALUES ('" + player.getUniqueID() + "', '" + player.getName() + "', '" + player.getMail() + "', '" + player.getDateOfBirth() + "', '" + player.getScore() + "');";
 
         sqlQuery(sql);
     }
@@ -59,7 +67,7 @@ public class DatabaseCalls {
         ResultSet resultSet = sqlQueryWithReturn("SELECT * FROM players WHERE id = '" + uniqueID + "'");
         try {
             if (resultSet.next()) {
-                player = new Player(resultSet.getString(1), resultSet.getString(2));
+                player = new Player(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5));
             }
             connection.close();
             return player;
@@ -76,7 +84,7 @@ public class DatabaseCalls {
         ResultSet resultSet = sqlQueryWithReturn("SELECT * FROM players");
         try {
             while (resultSet.next()) {
-              players.add(new Player(resultSet.getString(1), resultSet.getString(2)));
+              players.add(new Player(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5)));
             }
             connection.close();
         } catch (SQLException e) {
@@ -167,11 +175,11 @@ public class DatabaseCalls {
         try {
             while (resultSet.next()){
                 Team[] teams = {getTeamFromDB(resultSet.getString(2)), getTeamFromDB(resultSet.getString(3))};
-                Match match = new Match(teams, resultSet.getInt(6), resultSet.getString(1), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(4));
+                Match match = new Match(teams, resultSet.getInt(6), resultSet.getString(1), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(4), resultSet.getInt(9), resultSet.getInt(10));
                 brackets.get(resultSet.getInt(8)).add(match);
                 System.out.println("added match to bracket: " + resultSet.getInt(8));
-                connection.close();
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return brackets;
@@ -196,7 +204,7 @@ public class DatabaseCalls {
 
     public void updateMatch(Match match){
 
-        String sql = "UPDATE matches SET teamwon = '" + match.getIndexOfWinningTeam() + "', matchplayed = '" + match.getMatchPlayed() + "' WHERE id = '" + match.getUniqueID() + "'";
+        String sql = "UPDATE matches SET teamwon = '" + match.getIndexOfWinningTeam() + "', matchplayed = '" + match.getMatchPlayed() +  "', team0score = '" + match.getTeam0Score() + "', team1score = '" + match.getTeam1Score() + "' WHERE id = '" + match.getUniqueID() + "'";
         sqlQuery(sql);
 
     }

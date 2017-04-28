@@ -17,8 +17,8 @@
       <TableView fx:id="bracketsTable" onMouseClicked="#mouseClickedOnMatchTable" prefHeight="292.0" prefWidth="781.0">
         <columns>
           <TableColumn prefWidth="167.0" text="Match Makeup"><cellValueFactory><PropertyValueFactory property="matchTeams" /></cellValueFactory></TableColumn>
-          <TableColumn prefWidth="147.0" text="Team 0"><cellValueFactory><PropertyValueFactory property="team0" /></cellValueFactory></TableColumn>
-            <TableColumn prefWidth="152.0" text="Team 1"><cellValueFactory><PropertyValueFactory property="team1" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="147.0" text="Team 0 Score"><cellValueFactory><PropertyValueFactory property="team0Score" /></cellValueFactory></TableColumn>
+            <TableColumn prefWidth="152.0" text="Team 1 Score"><cellValueFactory><PropertyValueFactory property="team1Score" /></cellValueFactory></TableColumn>
             <TableColumn prefWidth="91.0" text="Match Played"><cellValueFactory><PropertyValueFactory property="matchPlayedString" /></cellValueFactory></TableColumn>
             <TableColumn prefWidth="223.0" text="Team Won"><cellValueFactory><PropertyValueFactory property="indexOfWinningTeamString" /></cellValueFactory></TableColumn>
         </columns>
@@ -38,11 +38,12 @@
       <TableView fx:id="playerTable" prefHeight="209.0" prefWidth="395.0" translateY="-0.0">
         <columns>
           <TableColumn prefWidth="183.0" text="Player Name"><cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory></TableColumn>
-          <TableColumn prefWidth="211.0" text="Player ID"><cellValueFactory><PropertyValueFactory property="uniqueID" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="211.0" text="Lifetime Score"><cellValueFactory><PropertyValueFactory property="score" /></cellValueFactory></TableColumn>
         </columns>
       </TableView>
       <Button mnemonicParsing="false" onAction="#team0Win" text="Team0 Wins" />
+      <Button fx:id="playerScore" mnemonicParsing="false" onAction="#playerScore" text="Selected player score" />
       <Button mnemonicParsing="false" onAction="#team1Win" text="Team1 Wins" />
-      <Button mnemonicParsing="false" onAction="#addBracket" text="Progress to next bracket" />
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#addBracket" text="Progress to next bracket" translateX="475.0" translateY="-75.0" />
    </children>
 </FlowPane>

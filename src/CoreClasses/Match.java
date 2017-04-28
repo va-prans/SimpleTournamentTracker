@@ -9,6 +9,8 @@ public class Match {
     private int indexOfWinningTeam;
     private int indexOfLosingTeam;
     private int matchPlayed;
+    private int team0Score;
+    private int team1Score;
     private String indexOfWinningTeamString;
     private String matchPlayedString;
     private String uniqueID;
@@ -18,8 +20,10 @@ public class Match {
     private String matchTeams;
     private int bracket;
 
-    public Match(Team[] teams, int matchPlayed, String uniqueID, String tournamentID, int bracket, int indexOfWinningTeam) {
+    public Match(Team[] teams, int matchPlayed, String uniqueID, String tournamentID, int bracket, int indexOfWinningTeam, int team0Score, int team1Score) {
 
+        this.team0Score = team0Score;
+        this.team1Score = team1Score;
         this.teams = teams;
         this.matchPlayed = matchPlayed;
         this.uniqueID = uniqueID;
@@ -38,6 +42,30 @@ public class Match {
             this.indexOfWinningTeamString = "Match not played yet.";
         }
 
+    }
+
+    public void incrementTeam0Score (){
+        this.team0Score++;
+    }
+
+    public void incrementTeam1Score (){
+        this.team1Score++;
+    }
+
+    public int getTeam0Score() {
+        return team0Score;
+    }
+
+    public void setTeam0Score(int team0Score) {
+        this.team0Score = team0Score;
+    }
+
+    public int getTeam1Score() {
+        return team1Score;
+    }
+
+    public void setTeam1Score(int team1Score) {
+        this.team1Score = team1Score;
     }
 
     public String getIndexOfWinningTeamString() {

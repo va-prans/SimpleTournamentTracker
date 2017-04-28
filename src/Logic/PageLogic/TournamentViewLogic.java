@@ -18,6 +18,12 @@ public class TournamentViewLogic {
 
    DatabaseCalls databaseCalls = new DatabaseCalls();
 
+   public void updatePlayerScore(Player player) {
+
+        databaseCalls.updatePlayerScore(player);
+
+   }
+
    public ObservableList<Match> addBracket(ObservableList<Match> previousBracketMatches){
 
        ObservableList<Match> addedMatches = FXCollections.observableArrayList();
@@ -37,10 +43,9 @@ public class TournamentViewLogic {
 
            String uniqueID = UUID.randomUUID().toString();
            Team[] matchTeams = {winningTeams.get(i), winningTeams.get(i+1)};
-           Match match = new Match(matchTeams, 0, uniqueID, previousBracketMatches.get(0).getTournamentID(), previousBracketMatches.get(0).getBracket() + 1, 5);
+           Match match = new Match(matchTeams, 0, uniqueID, previousBracketMatches.get(0).getTournamentID(), previousBracketMatches.get(0).getBracket() + 1, 5,0,0);
            databaseCalls.addMatchToDB(match);
            addedMatches.add(match);
-           //dankles
 
        }
 

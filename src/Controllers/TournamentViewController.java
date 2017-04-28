@@ -37,7 +37,7 @@ public class TournamentViewController {
     @FXML Label tournamentNameLabel;
 
     ObservableList<ObservableList<Match>> allMatches = FXCollections.observableArrayList();
-
+    String currentTeamID;
     TournamentViewLogic tournamentViewLogic = new TournamentViewLogic();
 
     @FXML public void initialize() {
@@ -140,7 +140,7 @@ public class TournamentViewController {
     }
 
     public void playerDisplay(String teamID){
-
+        currentTeamID = teamID;
         Thread one = new Thread(() -> {
             ObservableList<Player> players = tournamentViewLogic.getPlayersInTeam(teamID);
             playerTable.setItems(players);
@@ -203,6 +203,34 @@ public class TournamentViewController {
         stage.setTitle("AdminPage");
         stage.setScene(new Scene(root));
         stage.show();
+
+    }
+
+    public void playerScore(ActionEvent actionEvent) {
+
+        if (playerTable.getSelectionModel().getSelectedItem() != null && bracketsTable.getSelectionModel().getSelectedItem() != null) {
+
+            Player player = playerTable.getSelectionModel().getSelectedItem();
+            player.incrementScore();
+            tournamentViewLogic.updatePlayerScore(player);
+            playerDisplay(currentTeamID);
+
+            for (int i = 0; i < allMatches.get(choiceBox.getValue()).size() ; i++) {
+                if (bracketsTable.getSelectionModel().getSelectedItem().getUniqueID().equals(allMatches.get(choiceBox.getValue()).get(i).getUniqueID())){
+                    if (allMatches.get(choiceBox.getValue()).get(i).getTeams()[0].getUniqueID().equals(currentTeamID)){
+                        allMatches.get(choiceBox.getValue()).get(i).incrementTeam0Score();
+                    }
+
+                    else if (allMatches.get(choiceBox.getValue()).get(i).getTeams()[1].getUniqueID().equals(currentTeamID)) {
+                        allMatches.get(choiceBox.getValue()).get(i).incrementTeam1Score();
+                    }
+                }
+            }
+
+            bracketsTable.refresh();
+
+
+        }
 
     }
 }

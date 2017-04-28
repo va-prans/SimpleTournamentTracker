@@ -70,17 +70,17 @@ public class TournamentCreationLogic {
         }
         if((teamsArray.size()%2)!=0){
 
-            /*Player dummy1 = new Player(UUID.randomUUID().toString(), "DUMMY");
-            Player dummy2 = new Player(UUID.randomUUID().toString(), "DUMMY");
-            addPlayerToDB(dummy1);
-            addPlayerToDB(dummy2);
-            ArrayList<Player> dummyPlayers1 = new ArrayList<>();
-            dummyPlayers1.add(dummy1);
-            dummyPlayers1.add(dummy2);
-            Team dummyTeam = new Team("DUMMY", dummyPlayers1, UUID.randomUUID().toString());
-            addTeamToDB(dummyTeam);*/
+//            Player dummy1 = new Player(UUID.randomUUID().toString(), "DUMMY");
+//            Player dummy2 = new Player(UUID.randomUUID().toString(), "DUMMY");
+//            addPlayerToDB(dummy1);
+//            addPlayerToDB(dummy2);
+//            ArrayList<Player> dummyPlayers1 = new ArrayList<>();
+//            dummyPlayers1.add(dummy1);
+//            dummyPlayers1.add(dummy2);
+//            Team dummyTeam = new Team("DUMMY", dummyPlayers1, UUID.randomUUID().toString());
+//            addTeamToDB(dummyTeam);
             //waazaa
-            Team dummyTeam = databaseCalls.getTeamFromDB("7dee61b2-1cca-4b9c-82dc-d9e205a7e8f4");
+            Team dummyTeam = databaseCalls.getTeamFromDB("83d977c9-0092-4c82-a74e-c44808901f21");
             teamsArray.add(dummyTeam);
 
         }
@@ -93,7 +93,7 @@ public class TournamentCreationLogic {
 
             uniqueID = UUID.randomUUID().toString();
             Team[] matchTeams = {teamsArray.get(i), teamsArray.get(i+1)};
-            matches.add(new Match(matchTeams, 0, uniqueID, uniqueIDT, 0, 5));
+            matches.add(new Match(matchTeams, 0, uniqueID, uniqueIDT, 0, 5, 0, 0));
 
         }
 
