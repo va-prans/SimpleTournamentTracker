@@ -132,8 +132,8 @@ public class TournamentGuestController {
     public void backToStart(ActionEvent actionEvent) throws IOException {
 
         Stage stage = Main.getStage();
-        Parent root = FXMLLoader.load(getClass().getResource("Views/AdminPage.fxml"));
-        stage.setTitle("AdminPage");
+        Parent root = FXMLLoader.load(getClass().getResource("Views/StartPage.fxml"));
+        stage.setTitle("HomePage");
         stage.setScene(new Scene(root));
         stage.show();
 
