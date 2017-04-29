@@ -70,6 +70,10 @@ public class TournamentViewController {
                 }
             }
 
+            else {
+
+            }
+
             bracketsTable.setItems(allMatches.get(choiceBox.getValue()));
             bracketsTable.refresh();
 
@@ -213,7 +217,7 @@ public class TournamentViewController {
             Player player = playerTable.getSelectionModel().getSelectedItem();
             player.incrementScore();
             tournamentViewLogic.updatePlayerScore(player);
-            playerDisplay(currentTeamID);
+            playerTable.refresh();
 
             for (int i = 0; i < allMatches.get(choiceBox.getValue()).size() ; i++) {
                 if (bracketsTable.getSelectionModel().getSelectedItem().getUniqueID().equals(allMatches.get(choiceBox.getValue()).get(i).getUniqueID())){

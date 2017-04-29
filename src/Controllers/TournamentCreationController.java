@@ -218,42 +218,39 @@ public class TournamentCreationController {
 
 
     public void addExistingPlayer(ActionEvent actionEvent) {
+        if (existingPlayersTable.getSelectionModel().getSelectedItem() != null) {
+            if (players.size() <= 1) {
 
-        if (players.size() <= 1) {
+                boolean playerAlreadyAdded = false;
+                playerNameWarningLabel.setText("");
+                Player existingPlayerToAdd = existingPlayersTable.getSelectionModel().getSelectedItem();
 
-            boolean playerAlreadyAdded = false;
-            playerNameWarningLabel.setText("");
-            Player existingPlayerToAdd = existingPlayersTable.getSelectionModel().getSelectedItem();
+                for (int i = 0; i < players.size(); i++) {
 
-            for (int i = 0; i < players.size(); i++) {
+                    if (existingPlayerToAdd.getUniqueID().equals(players.get(i).getUniqueID())) {
 
-                if (existingPlayerToAdd.getUniqueID().equals(players.get(i).getUniqueID())){
+                        playerAlreadyAdded = true;
 
-                    playerAlreadyAdded = true;
+                    }
+
+                }
+                if (!playerAlreadyAdded) {
+
+                    players.add(existingPlayerToAdd);
+                    teamCreationTable.setItems(players);
+                    teamAlreadyAddedWarning.setText("");
+
+                } else {
+
+                    playerNameWarningLabel.setText("Player already added to team.");
 
                 }
 
-            }
-            if (!playerAlreadyAdded) {
+            } else {
 
-                players.add(existingPlayerToAdd);
-                teamCreationTable.setItems(players);
-                teamAlreadyAddedWarning.setText("");
+                playerNameWarningLabel.setText("Team Full.");
 
             }
-
-            else {
-
-                playerNameWarningLabel.setText("Player already added to team.");
-
-            }
-
-        }
-
-        else {
-
-            playerNameWarningLabel.setText("Team Full.");
-
         }
     }
 

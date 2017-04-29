@@ -16,7 +16,7 @@
       <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="71.0" />
       <TableView fx:id="bracketsTable" onMouseClicked="#mouseClickedOnMatchTable" prefHeight="292.0" prefWidth="781.0">
         <columns>
-          <TableColumn prefWidth="167.0" text="Match Makeup"><cellValueFactory><PropertyValueFactory property="matchTeams" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="167.0" text="[SELECT]Match Makeup"><cellValueFactory><PropertyValueFactory property="matchTeams" /></cellValueFactory></TableColumn>
           <TableColumn prefWidth="147.0" text="Team 0 Score"><cellValueFactory><PropertyValueFactory property="team0Score" /></cellValueFactory></TableColumn>
             <TableColumn prefWidth="152.0" text="Team 1 Score"><cellValueFactory><PropertyValueFactory property="team1Score" /></cellValueFactory></TableColumn>
             <TableColumn prefWidth="91.0" text="Match Played"><cellValueFactory><PropertyValueFactory property="matchPlayedString" /></cellValueFactory></TableColumn>
@@ -25,25 +25,25 @@
       </TableView>
       <TableView fx:id="team0Table" onMouseClicked="#team0TableMouseClicked" prefHeight="39.0" prefWidth="395.0">
         <columns>
-          <TableColumn prefWidth="186.0" text="Team 0 Name"><cellValueFactory><PropertyValueFactory property="teamName" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="186.0" text="[SELECT}Team 0 Name"><cellValueFactory><PropertyValueFactory property="teamName" /></cellValueFactory></TableColumn>
           <TableColumn prefWidth="207.0" text="Players"><cellValueFactory><PropertyValueFactory property="playerNames" /></cellValueFactory></TableColumn>
         </columns>
       </TableView>
       <TableView fx:id="team1Table" onMouseClicked="#team1TableMouseClicked" prefHeight="56.0" prefWidth="384.0" translateX="-0.0">
         <columns>
-          <TableColumn prefWidth="188.0" text="Team 1 Name"><cellValueFactory><PropertyValueFactory property="teamName" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="188.0" text="[SELECT]Team 1 Name"><cellValueFactory><PropertyValueFactory property="teamName" /></cellValueFactory></TableColumn>
           <TableColumn prefWidth="190.0" text="Players"><cellValueFactory><PropertyValueFactory property="playerNames" /></cellValueFactory></TableColumn>
         </columns>
       </TableView>
       <TableView fx:id="playerTable" prefHeight="209.0" prefWidth="395.0" translateY="-0.0">
         <columns>
-          <TableColumn prefWidth="183.0" text="Player Name"><cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory></TableColumn>
+          <TableColumn prefWidth="183.0" text="[SELECT]Player Name"><cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory></TableColumn>
           <TableColumn prefWidth="211.0" text="Lifetime Score"><cellValueFactory><PropertyValueFactory property="score" /></cellValueFactory></TableColumn>
         </columns>
       </TableView>
       <Button mnemonicParsing="false" onAction="#team0Win" text="Team0 Wins" />
       <Button fx:id="playerScore" mnemonicParsing="false" onAction="#playerScore" text="Selected player score" />
       <Button mnemonicParsing="false" onAction="#team1Win" text="Team1 Wins" />
-      <Button alignment="CENTER" mnemonicParsing="false" onAction="#addBracket" text="Progress to next bracket" translateX="475.0" translateY="-75.0" />
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#addBracket" text="Progress to next bracket(Note: all matches have to be played)" translateX="395.0" translateY="-75.0" />
    </children>
 </FlowPane>
